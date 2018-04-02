@@ -8,6 +8,7 @@ import About from '../About/About.jsx';
 import Home from '../Home/Home.jsx';
 import Repos from '../Repos/Repos.jsx';
 import RepoDetails from '../RepoDetails/RepoDetails.jsx';
+import ServerError from '../ServerError/ServerError.jsx';
 
 class AppContainer extends Component{
 	render(){
@@ -39,6 +40,7 @@ class AppContainer extends Component{
 						      <Route path="/about" component={About} />
 						      <Route path="/repos" component={Repos} />
 						      <Route path="/topics" component={Topics} />
+						      <Route path="/error" component={ServerError} />
 						    </div>
 						  </BrowserRouter>
 

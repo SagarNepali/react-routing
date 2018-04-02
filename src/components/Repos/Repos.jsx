@@ -13,9 +13,19 @@ class Repos extends Component{
 
 	componentDidMount(){
 		fetch('https://api.github.com/users/pro-react/repos')
-		.then((response) => response.json())
+		.then((response) =>{
+			if(response.ok){
+				return response.json()
+			}else{
+				throw new Errror("Server response not OK")
+			}
+			
+		})
 		.then((responseData) => {
 			this.setState({repositories:responseData});
+		})
+		.catch((error)=>{
+			this.props.history.push("/error");
 		});
 	}
 
@@ -23,7 +33,7 @@ class Repos extends Component{
 
 		let repos = this.state.repositories.map((repo) => (
 						<li key={repo.id}>
-							<Link to={"/repos/details/"+repo.name} activeClassName="active">{repo.name}</Link>
+							<Link to={"/repos/details/"+repo.name} activeclassname="active">{repo.name}</Link>
 						</li>
 					));
 

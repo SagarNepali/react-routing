@@ -12,16 +12,25 @@ export default class RepoDetails extends Component{
 
 	fetchData(repo_name){
 		fetch('https://api.github.com/repos/pro-react/'+repo_name)
-		.then((response) => response.json())
+		.then((response) =>{
+			if(response.ok()){
+				return response.json();
+			}else{
+				throw new Error("Server connection failed")
+			}
+		})
 		.then((responseData) => {
 		this.setState({repository:responseData});
+		})
+		.catch((error)=>{
+			this.props.history.push("/error");
 		});
-		console.log(this.state)
+
 	}
 	 
 	componentDidMount(){
 		// The Router injects the key "repo_name" inside the params prop
-		
+		console.log(this.props)
 		let repo_name = this.props.match.params.repo_name;
 		this.fetchData(repo_name)
 	}
